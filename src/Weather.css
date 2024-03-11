@@ -1,0 +1,30 @@
+.appdesign{
+    background-color: #98D5D8;
+    height: 800px;
+    width: auto;
+}
+
+.flex-container{
+    display: flex;
+    background-image: url("Rectangle\ 2.png");
+    justify-content: center;
+    border-radius: 35px;
+    width: auto;
+    background-size: cover;
+
+}
+
+.flex-container > div{
+    margin: 10px;
+    padding: 20px;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+#title{
+    margin-right: 800px;
+}
+
+#button{
+    margin: 20px;
+}

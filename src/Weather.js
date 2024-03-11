@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './Weather.css';
+
 const Weather = () => {
 const [city, setCity] = useState('');
 const [weatherData, setWeatherData] = useState(null);
@@ -25,7 +27,7 @@ e.preventDefault();
 fetchData();
 };
 return (
-<div>
+<div className='appdesign'>
 <form onSubmit={handleSubmit}>
 <input
 type="text"
@@ -33,12 +35,19 @@ placeholder="Enter city name"
 value={city}
 onChange={handleInputChange}
 />
-<button type="submit">Get Weather</button>
+<button id='button' type="submit">Get Weather</button>
 </form>
 {weatherData ? (
 <>
-<h2>{weatherData.name}</h2>
-<p>Temperature: {weatherData.main.temp}°C</p>
+
+<div className='flex-container'>
+    <div id='title'><p>{weatherData.name}</p></div>
+    <div><p>Day</p></div>
+    <div><p>{weatherData.main.temp}°C</p></div>
+</div>
+
+
+
 <p>Description: {weatherData.weather[0].description}</p>
 <p>Feels like : {weatherData.main.feels_like}°C</p>
 <p>Humidity : {weatherData.main.humidity}%</p>
