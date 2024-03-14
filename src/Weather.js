@@ -11,33 +11,34 @@ const Weather = () => {
     const [weatherMap, setWeatherMap] = useState(null); 
     const [weatherDisplay, setWeeklyWeather] = useState('');
     const [weatherDisplay2, setTodaysWeather] = useState('');
+    const currentDay = new Date().toDateString();
 
-    const fetchData = async () => {
+    async function fetchData() {
         try {
             const response = await axios.get(
-`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=69084501b8a41087da148556d2a1b461`
-);
+                `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=69084501b8a41087da148556d2a1b461`
+            );
             setWeatherData(response.data);
             console.log(response.data); //You can see all the weather data in console log
-        }   catch (error) {
+        } catch (error) {
             console.error(error);
         }
         try {
             const reply = await axios.get(
-            `https://tile.openweathermap.org/map/temp_new/${z}/${x}/${y}.png?appid=69084501b8a41087da148556d2a1b461`
+                `https://tile.openweathermap.org/map/temp_new/${z}/${x}/${y}.png?appid=69084501b8a41087da148556d2a1b461`
             );
             fetch(`https://tile.openweathermap.org/map/temp_new/${z}/${x}/${y}.png?appid=69084501b8a41087da148556d2a1b461`)
-            .then(reply => {return reply.blob()})
-            .then(blob => {
-                var img = URL.createObjectURL(blob);
-                console.log(img)
-                setWeatherMap(img);
-            })
+                .then(reply => { return reply.blob(); })
+                .then(blob => {
+                    var img = URL.createObjectURL(blob);
+                    console.log(img);
+                    setWeatherMap(img);
+                });
             console.log(reply.data); //You can see all the weather data in console log
-            } catch (error) {
+        } catch (error) {
             console.error(error);
-            }
-    };
+        }
+    }
     useEffect(() => {
         fetchData();
     }, []);
@@ -56,22 +57,43 @@ const Weather = () => {
         setWeeklyWeather();
     }
 
+    // const getNextFiveDays = () => {
+    //     const days = [];
+    //     for (let i = 1; i <= 5; i++) {
+    //         const nextDay = new Date();
+    //         nextDay.setDate(nextDay.getDate() + i);
+    //         days.push(nextDay.toDateString());
+    //     }
+    //     return days;
+    // };
+
+    const getDaysRange = () => {
+        const days = [];
+        for (let i = -1; i <= 3; i++) { // Starting from -1 to include the day before
+            const day = new Date();
+            day.setDate(day.getDate() + i);
+            // Format the date to show only the day of the week
+            const dayOfWeek = day.toLocaleDateString('en-US', { weekday: 'long' });
+            days.push(dayOfWeek);
+        }
+        return days;
+    };
+
     const weeklyWeather = () => {
-            setWeeklyWeather(
-            <div class = 'weather-box'>
-                <p>Day -1</p>
-                <p>Today</p>
-                <p>Day +1</p>
-                <p>Day +2</p>
-                <p>Day +3</p>
-                <p>Day +4</p>
-                <p>Day +5</p>
-            </div>
-            );
-            setTodaysWeather();
+        const daysRange = getDaysRange(); // Get the formatted days of the week
+        setWeeklyWeather(
+            <div className='weekly-weather'>
+                {daysRange.map((day, index) => (
+                    <p key={index}>{day}</p> // Display each day of the week
+            ))}
+        </div>
+    );
+        setTodaysWeather();
+            
     }
 
 return (
+
     <div className='appdesign'>
         <form onSubmit={handleSubmit}>
             <input
@@ -84,10 +106,11 @@ return (
         </form>
         {weatherData ? (
         <>
+
         <div className = 'page-grid'>
             <div className='flex-container'>
                 <div id='title'><p>{weatherData.name}</p></div>
-                <div><p>Day</p></div>
+                <div><p>{currentDay}</p></div>
                 <div><p>{weatherData.main.temp}°C</p></div>
             </div>
 
