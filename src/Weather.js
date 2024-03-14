@@ -10,7 +10,7 @@ const Weather = () => {
     const [weatherData, setWeatherData] = useState(null);
     const [weatherMap, setWeatherMap] = useState(null); 
     const [weatherDisplay, setWeeklyWeather] = useState('');
-    const [weatherDisplay2, setTodaysWeather] = useState('');
+    const [weatherDisplay2, setTodaysWeather] = useState(''); // weatherDisplay and weatherDisplay2 set by the correlating functions
     const currentDay = new Date().toDateString();
 
     async function fetchData() {
@@ -52,6 +52,7 @@ const Weather = () => {
         fetchData();
     };
 
+  //Changes the weather data displayed to just today's weather
   const todaysWeather = () => {
         setTodaysWeather(<p>Today's Weather Will Be Here</p>);
         setWeeklyWeather();
@@ -94,8 +95,8 @@ const Weather = () => {
 
 return (
 
-    <div className='appdesign'>
-        <form onSubmit={handleSubmit}>
+    <div className='appdesign'> 
+        <form onSubmit={handleSubmit}> {/*User inputs location to know information about*/}
             <input
                 type="text"
                 placeholder="Enter city name"
@@ -106,14 +107,15 @@ return (
         </form>
         {weatherData ? (
         <>
-
         <div className = 'page-grid'>
-            <div className='flex-container'>
+            {/*Displays the chosen location, current day, and main temperature*/}
+            <div className='flex-container'> 
                 <div id='title'><p>{weatherData.name}</p></div>
                 <div><p>{currentDay}</p></div>
                 <div><p>{weatherData.main.temp}°C</p></div>
             </div>
 
+            {/*Displays the weekly weather or current day weather depending on user button selection*/}
             <div className = 'weather-box'>
                     <button type = "button" id = 'weather-choice' onClick={todaysWeather}>Today's Weather</button>
                     <button type = "button" id = 'weather-choice2' onClick={weeklyWeather}>Weekly Weather</button>
@@ -121,13 +123,27 @@ return (
                     <p>{weatherDisplay2}</p>
             </div>
 
-            <div className = 'activity-desc'>
+            {/*Displays general weather information and catered advice to users*/}
+            <div className = 'weather-desc'>
+                <h2>Weather Information</h2>
                 <p>Description: {weatherData.weather[0].description}</p>
                 <p>Feels like : {weatherData.main.feels_like}°C</p>
                 <p>Humidity : {weatherData.main.humidity}%</p>
                 <p>Pressure : {weatherData.main.pressure}</p>
                 <p>Wind Speed : {weatherData.wind.speed}m/s</p>
+
+                <div id = 'activity-desc'>
+                    <h2>Activity Specific</h2>
+                    <h3>Cycling</h3>
+                    <p>INSERT STATEMENTS HERE</p>
+                    <h3>Hiking</h3>
+                    <p>INSERT STATEMENTS HERE</p>
+                    <h3>Camping</h3>
+                    <p>INSERT STATEMENTS HERE</p>
+                </div>
             </div>
+
+            {/*Displays weather map for the day*/}
             <div>
                 <img id = "weather-map" src = {weatherMap} alt='map'></img>
             </div>

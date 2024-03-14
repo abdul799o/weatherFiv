@@ -1,72 +1,4 @@
-.flex-container{
-    display: flex;
-    background-image: url("Rectangle\ 2.png");
-    justify-content: center;
-    border-radius: 35px;
-    width: auto;
-    background-size: cover;
-
-}
-
-.flex-container > div{
-    margin: 10px;
-    padding: 20px;
-    font-size: 30px;
-    font-weight: 600;
-}
-
-.page-grid{
-    display: grid;
-    grid-template-columns: auto auto;
-    gap: 20px;
-    padding: 25px;
-}
-
-.page-grid > .flex-container,.weather-box{
-    grid-column: 1/ span 2;
-}
-.weather-box{
-    display: grid;
-    grid-template-columns: auto auto auto auto auto auto;
-    grid-template-rows: 50px;
-    height: 400px;
-    background-color: white;
-    border-radius: 35px;
-}
-
-.weather-box > #weather-choice{
-    grid-row: 1;
-    grid-column: 6;
-}
-
-.weather-box > #weather-choice2{
-    grid-row: 1;
-    grid-column: 7;
-}
-
-.weather-box > p{
-    grid-row: 2;
-    padding-top: 50px;
-    font-size: 35px;
-}
-
-.activity-desc{
-    background-color: #6AD8B7;
-    border-radius: 35px;
-    width: 462px;
-    height: 368px;
-    justify-content: center;
-}
-
-#weather-map{
-    width: max-content;
-    height: 368px;
-}
-
-#title{
-    margin-right: 800px;
-}
-
+/*Styling for the weather input form*/
 #button{
     margin: 10px;
     background-color: #6AD8B7;
@@ -75,7 +7,122 @@
     border-radius: 20px;
 }
 
+/*Styling for the page composition*/
+.page-grid{
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 20px;
+    padding: 25px;
+}
+.page-grid > .flex-container,.weather-box{
+    grid-column: 1/ span 2;
+}
+
+/*Styling for the weather page header*/
+.flex-container{
+    display: flex;
+    background-image: url("Rectangle\ 2.png");
+    justify-content: center;
+    border-radius: 35px;
+    width: auto;
+    background-size: cover;
+}
+.flex-container > div{
+    margin: 10px;
+    padding: 20px;
+    font-size: 30px;
+    font-weight: 600;
+}
+#title{
+    margin-right: 800px;
+}
+
+/*Styling for the grid displaying today's weather and weekly weather*/
+.weather-box{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    grid-template-rows: 50px;
+    height: 400px;
+    background-color: #6AD8B7;
+    border-radius: 35px;
+}
+.weather-box > #weather-choice{
+    grid-row: 1;
+    grid-column: 6;
+    font-size: large;
+    background-color: #6AD8B7;
+    border-color: #6AD8B7;
+}
+.weather-box > #weather-choice2{
+    grid-row: 1;
+    grid-column: 7;
+    font-size: large;
+    background-color: #6AD8B7;
+    border-color: #6AD8B7;
+}
+.weather-box > p{
+    grid-row: 2;
+    padding-top: 50px;
+    font-size: 35px;
+}
 .weekly-weather{
     display: grid;
     grid-template-columns: auto auto auto auto auto auto;
+    gap: 50px;
+    text-align: center;
 }
+
+/*Styling for the general weather information & activity information box*/
+.weather-desc{
+    background-color: #6AD8B7;
+    border-radius: 35px;
+    width: 500px;
+    height: fit-content;
+    text-align: center;
+}
+.weather-desc > p{
+    margin: 0px;
+    font-size: 20px;
+}
+#activity-desc{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+#activity-desc > p{
+    margin: 0px;
+    font-size: 20px;
+}
+
+/*Styling for the included weather map*/
+#weather-map{
+    width: 550px;
+    height: auto;
+}
+
+
+/*Responsive Media Queries for Smaller Devices*/
+@media only screen and (max-width:768px){
+    p{
+        color: red;
+    }
+    /*Styling for the page composition*/
+    .page-grid{
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: auto auto auto auto;
+        row-gap: 20px;
+        padding: 25px;
+    }
+    .flex-container{
+        grid-row: 1/1;
+    }
+    .weather-box{
+        grid-row: 2/2;
+    }
+    .weather-desc{
+        grid-row: 3/3;
+    }
+    #weather-map{
+        grid-row: 4/4;
+    }
+  }
