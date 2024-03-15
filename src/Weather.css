@@ -10,7 +10,9 @@
 /*Styling for the page composition*/
 .page-grid{
     display: grid;
+    min-height: 100%;
     grid-template-columns: auto auto;
+    grid-template-rows: auto auto auto;
     gap: 20px;
     padding: 25px;
 }
@@ -99,18 +101,17 @@
     height: auto;
 }
 
-
 /*Responsive Media Queries for Smaller Devices*/
 @media only screen and (max-width:768px){
     p{
         color: red;
     }
-    /*Styling for the page composition*/
+    /*Styling for the page re-composition*/
     .page-grid{
         display: grid;
-        grid-template-columns: auto;
-        grid-template-rows: auto auto auto auto;
-        row-gap: 20px;
+        grid-template-columns: auto auto;
+        grid-template-rows: 15em 20em 20em 20em;
+        row-gap: 100px;
         padding: 25px;
     }
     .flex-container{
@@ -121,8 +122,12 @@
     }
     .weather-desc{
         grid-row: 3/3;
+        grid-column: 1/span 2;
+        width: auto;
+
     }
     #weather-map{
         grid-row: 4/4;
+        grid-column: 1/span 2;
     }
   }
