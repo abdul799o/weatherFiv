@@ -3,7 +3,7 @@ import axios from 'axios';
 import './Weather.css';
 
 const Weather = () => {
-    const [city, setCity] = useState('');
+    const [city, setCity] = useState('London');
     const z = 0;
     const x = 0;
     const y = 0;
@@ -39,8 +39,9 @@ const Weather = () => {
             console.error(error);
         }
     }
-    useEffect(() => {
+    useEffect(() => { //API weather data fetched after initial page render
         fetchData();
+        todaysWeather();
     }, []);
 
     const handleInputChange = (e) => {
@@ -52,7 +53,7 @@ const Weather = () => {
         fetchData();
     };
 
-  //Changes the weather data displayed to just today's weather
+  //Sets the weather data display to just today's weather
   const todaysWeather = () => {
         setTodaysWeather(<p>Today's Weather Will Be Here</p>);
         setWeeklyWeather();
@@ -80,6 +81,7 @@ const Weather = () => {
         return days;
     };
 
+    //Sets the weather data display to daily weather
     const weeklyWeather = () => {
         const daysRange = getDaysRange(); // Get the formatted days of the week
         setWeeklyWeather(
@@ -90,7 +92,6 @@ const Weather = () => {
         </div>
     );
         setTodaysWeather();
-            
     }
 
 return (
