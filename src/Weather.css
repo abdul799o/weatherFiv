@@ -105,13 +105,13 @@
 .weather-desc{
     background-color: #6AD8B7;
     border-radius: 2.5rem;
-    width: 20rem;
+    width: 40rem;
     height: fit-content;
     text-align: center;
 }
 .weather-desc > p{
     margin: 0rem;
-    font-size: 1rem;
+    font-size: 2rem;
 }
 #activity-desc{
     margin-top: 2rem;
@@ -119,12 +119,13 @@
 }
 #activity-desc > p{
     margin: 0rem;
-    font-size: 1rem;
+    font-size: 2rem;
 }
 
 /*Styling for the included weather map*/
 #weather-map{
     height: auto;
+    width: 30rem;
 }
 
 
