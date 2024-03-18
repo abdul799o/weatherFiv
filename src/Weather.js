@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Weather.css';
 
+
 const Weather = () => {
     const [city, setCity] = useState('London');
     const z = 0;
@@ -35,7 +36,15 @@ const Weather = () => {
                     var img = URL.createObjectURL(blob);
                     console.log(img);
                     setWeatherMap(img);
+
+                    // for(i=0; i<5; i++){
+                    //     Number(data.list[i].main.temp.toFixed(2)+"°")
+                    // }
+                    // for(i=0; i<5; i++){
+                    //     src="https://openweathermap.org/img/wn/" +data.list[i].weather[0].icon + ".png";
+                    // }
                 });
+
             console.log(reply.data); //You can see all the weather data in console log
         } catch (error) {
             console.error(error);
@@ -56,43 +65,13 @@ const Weather = () => {
         fetchData();
     };
 
-    const weatherIcon = () =>{
-        setIcon(<img src={require('./images/Sun_fill.png')} alt=""></img>)
+    
 
-    }
-
-    //Sets the weather data display to just today's weather
-    const todaysWeather = () => {
-        setTodaysWeather(
-        <div className = "todayGrid">
-            <div id = "weatherHour1">
-             <h5>Hour 1</h5>
-             <p>{icon}</p>
-            </div>
-
-            <div id = "weatherHour2">
-             <h5>Hour 2</h5>
-             <p>{icon}</p>
-            </div>
-
-            <div id = "weatherHour3">
-             <h5>Hour 3</h5>
-             <p>{icon}</p>
-            </div>
-        </div>
-        );
+  //Sets the weather data display to just today's weather
+  const todaysWeather = () => {
+        setTodaysWeather(<p>Today's Weather Will Be Here</p>);
         setWeeklyWeather();
     }
-
-    // const getNextFiveDays = () => {
-    //     const days = [];
-    //     for (let i = 1; i <= 5; i++) {
-    //         const nextDay = new Date();
-    //         nextDay.setDate(nextDay.getDate() + i);
-    //         days.push(nextDay.toDateString());
-    //     }
-    //     return days;
-    // };
 
     const getDaysRange = () => {
         const days = [];
@@ -118,6 +97,7 @@ const Weather = () => {
     );
         setTodaysWeather();
     }
+
     //Displays the recommendations for the specific activities based on the weather conditions
     const descriptions = (activity) => {
         //Order of weather conditions is Rain/Drizzle, Snow, Clear, Clouds, Thunderstorm, Fog, Other
@@ -195,6 +175,41 @@ return (
                     <p>{weatherDisplay}</p>
                     <p>{weatherDisplay2}</p>
             </div>
+
+            <div id="weather-container">
+                <div id="icons-container">
+                    <div id ="icons">
+                    <p class="weather" id="day1"></p>
+                    <div class="image"><img src={require('./dot.jpg')} class="imgClass" id="img1"></img></div>
+                    </div>
+                </div>
+                <div id="icons-container">
+                    <div id ="icons">
+                    <p class="weather" id="day2"></p>
+                    <div class="image"><img src={require('./dot.jpg')} class="imgClass" id="img2"></img></div>
+                    </div>
+                </div>
+                <div id="icons-container">
+                    <div id ="icons">
+                    <p class="weather" id="day3"></p>
+                    <div class="image"><img src={require('./dot.jpg')} class="imgClass" id="img3"></img></div>
+                    </div>
+                </div>
+                <div id="icons-container">
+                    <div id ="icons">
+                    <p class="weather" id="day4"></p>
+                    <div class="image"><img src={require('./dot.jpg')} class="imgClass" id="img4"></img></div>
+                    </div>
+                </div>
+                <div id="icons-container">
+                    <div id ="icons">
+                    <p class="weather" id="day5"></p>
+                    <div class="image"><img src={require('./dot.jpg')} class="imgClass" id="img5"></img></div>
+                    </div>
+                </div>
+            </div>
+
+            
 
             {/*Displays general weather information and catered advice to users*/}
             <div className = 'weather-desc'>
