@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { Route, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Weather.css';
-
+import Activities from './Activities';
 
 const Weather = () => {
     const [city, setCity] = useState('London');
@@ -15,6 +16,7 @@ const Weather = () => {
     const [weatherDisplay2, setTodaysWeather] = useState(''); // weatherDisplay and weatherDisplay2 set by the correlating functions
     const currentDay = new Date().toDateString();
     const activity = ["cycling", "hiking", "camping", "clothing"] //Order for the 3 activities and clothing used for recommendations
+    const navigate = useNavigate();
 
     async function fetchData() {
         try {
@@ -93,6 +95,11 @@ const Weather = () => {
         e.preventDefault();
         fetchData();
     };
+    const activityPage = () => {
+        <a href="/activities">
+            <button>Activities</button>
+        </a>
+    }
     const weatherIcon = () =>{
         setIcon(<img src={require('./images/Sun_fill.png')} alt=""></img>)
     }
@@ -247,6 +254,7 @@ return (
                 <div id='title'><p>{weatherData.name}</p></div>
                 <div><p>{currentDay}</p></div>
                 <div><p>{weatherData.main.temp}°C</p></div>
+                <button onClick={() => navigate('/activities')}>Activities</button>
             </div>
 
             {/*Displays the weekly weather or current day weather depending on user button selection*/}
