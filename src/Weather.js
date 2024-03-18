@@ -13,7 +13,7 @@ const Weather = () => {
     const [weatherDisplay, setWeeklyWeather] = useState('');
     const [weatherDisplay2, setTodaysWeather] = useState(''); // weatherDisplay and weatherDisplay2 set by the correlating functions
     const currentDay = new Date().toDateString();
-    const activity = ["cycling", "hiking", "camping", "clothing"]
+    const activity = ["cycling", "hiking", "camping", "clothing"] //Order for the 3 activities and clothing used for recommendations
 
     async function fetchData() {
         try {
@@ -118,7 +118,9 @@ const Weather = () => {
     );
         setTodaysWeather();
     }
+    //Displays the recommendations for the specific activities based on the weather conditions
     const descriptions = (activity) => {
+        //Order of weather conditions is Rain/Drizzle, Snow, Clear, Clouds, Thunderstorm, Fog, Other
         const cyclDesc = ["Roads may be slippery due to rain. Take caution", "Roads may be slippery due to ice. Take caution.", "No issues with slippery roads or visibility", "No major issues with slippery roads or visibility", "High risk activity. Thunderstorm currently taking place.", "Visibility on roads may be affected. Take caution."]
         const hikDesc = ["Some paths may become slippery due to rain.", "Some paths may be unsafe due to ice formations. Take caution.", "Weather ideal for hiking!", "Weather ideal for hiking!", "Thunderstorm currently taking place. Hiking not recommended.", "Visibility on pathways may be affected."]
         const campDesc = ["Prepare shelter to protect from rain.", "Prepare shelter to protect from snow or hail.", "Weather ideal for camping", "Weather ideal for camping", "Shelter required to protect from thunderstorm. Take caution", "No major issues with camping."]
@@ -136,7 +138,8 @@ const Weather = () => {
             return clothDesc[descCategory()]
         }
     }
-
+    //Returns an index depending on the current weather conditions which determines which 
+    //recommendation to display in the description arrays for the three descriptions and clothing
     const descCategory = () => {
         var descNo = -1
         if (weatherData.weather[0].main === "Rain" || weatherData.weather[0].main === "Drizzle"){
