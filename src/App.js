@@ -5,12 +5,16 @@ import { BrowserRouter, Route, Routes, Link, Navigate } from  'react-router-dom'
 
 function App() {
   return (
+    <div>
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Weather />} />
         <Route path="/weather" element={<Weather />} />
         <Route path="/activities" element={<Activities />} />
       </Routes>
     </BrowserRouter>
+    </div>
+    
   );
 }
 
