@@ -7,19 +7,20 @@
     border-radius: 2rem;
 }
 
-.imgClass{
-    height: 1rem;
-    width: 1rem;
-}
-
 /*Styling for the page composition*/
+.appdesign{
+    background-image: linear-gradient(#98d5d8,lightgreen);
+    font-family: Arial, Helvetica, sans-serif;
+    background-size: 100%;
+}
 .page-grid{
     display: grid;
     min-height: 100%;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 15% 40% 40%;
-    gap: 4rem 2rem;
-    padding: 2.5rem;
+    grid-template-columns: 50% 46%;
+    grid-template-rows: 10em 30em 25em;
+    gap: 4rem 3rem;
+    margin-left: 2.5rem;
+    margin-right: 2.5rem;
 }
 .page-grid > .flex-container,.weather-box{
     grid-column: 1/ span 2;
@@ -31,7 +32,8 @@
     background-image: url("./images/Rectangle\ 2.png");
     justify-content: center;
     border-radius: 2.5rem;
-    width: 100%;
+    width: auto;
+    height: 10em;
     background-size: cover;
 }
 .flex-container > div{
@@ -50,8 +52,8 @@
     display: grid;
     grid-template-columns: 20% 20% 20% 20% 20%;
     grid-template-rows: 4rem 36rem;
-    height: 40rem;
-    width: 100%;
+    height: 30em;
+    width: auto;
     background-color: #6AD8B7;
     border-radius: 2.5rem;
 }
@@ -101,34 +103,54 @@
     width: 100%;
 }
 
+.imgClass{
+    height: 1rem;
+    width: 1rem;
+}
+
 /*Styling for the general weather information & activity information box*/
-.weather-desc{
+.weather-desc, #activity-desc{
     background-color: #6AD8B7;
     border-radius: 2.5rem;
-    width: 40rem;
-    height: fit-content;
+    height: 25em;
+    width: auto;
     text-align: center;
+    margin-bottom: 3em;
 }
 .weather-desc > p{
-    margin: 0rem;
-    font-size: 2rem;
+    margin: 2rem;
+    font-size: 1.5rem;
 }
 #activity-desc{
-    margin-top: 2rem;
-    margin-bottom: 1rem;
+    grid-row: 3;
+    grid-column: 2;
 }
 #activity-desc > p{
     margin: 0rem;
-    font-size: 2rem;
+    font-size: 1rem;
 }
 
 /*Styling for the included weather map*/
 #weather-map{
-    height: auto;
-    width: 30rem;
+    width: 100%;
+    margin-top: 3em;
+    padding-bottom: 3em;
+    justify-content: center;
 }
 
+#weather-container{
+    display: flex;
+    height: 10rem;
+    width: 75rem;
+}
 
+#icons-container{
+    margin: 7rem;
+}
+#map-image{
+    height: 40em;
+    width: 80%;
+}
 /*Responsive Media Queries for Smaller Devices*/
 @media only screen and (max-width:768px){
     p{
