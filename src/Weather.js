@@ -52,9 +52,38 @@ const Weather = () => {
     }
     useEffect(() => { //API weather data fetched after initial page render
         fetchData();
-        //weatherIcon();
+        weatherIcon();
         todaysWeather();
+        getLocation();
     }, []);
+
+    //Gets User Location 
+    const getLocation=() =>  {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(success, error); //Takes 2 Functions, success and failure
+            console.log("Geolocation not supported.");
+          }
+          
+          //Successful Geolocation
+          function success(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+            // Make API call to OpenWeatherMap
+            fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=69084501b8a41087da148556d2a1b461&units=metric`)
+            .then(response => response.json())
+            .then(data => {
+            setWeatherData(data);
+            console.log(data);
+        })
+        .catch(error => console.log(error));
+            //setCity (weatherData);
+          }
+          //Unsuccessful Geolocation
+          function error() {
+            console.log("Unable to retrieve your location");
+          }
+        }
 
     const handleInputChange = (e) => {
         setCity(e.target.value);
@@ -64,12 +93,29 @@ const Weather = () => {
         e.preventDefault();
         fetchData();
     };
+    const weatherIcon = () =>{
+        setIcon(<img src={require('./images/Sun_fill.png')} alt=""></img>)
+    }
+    //Sets the weather data display to just today's weather
+    const todaysWeather = () => {
+        setTodaysWeather(
+        <div className = "todayGrid">
+            <div id = "weatherHour1">
+             <h5>Hour 1</h5>
+             <p>{icon}</p>
+            </div>
 
-    
+            <div id = "weatherHour2">
+             <h5>Hour 2</h5>
+             <p>{icon}</p>
+            </div>
 
-  //Sets the weather data display to just today's weather
-  const todaysWeather = () => {
-        setTodaysWeather(<p>Today's Weather Will Be Here</p>);
+            <div id = "weatherHour3">
+             <h5>Hour 3</h5>
+             <p>{icon}</p>
+            </div>
+        </div>
+        );
         setWeeklyWeather();
     }
 
