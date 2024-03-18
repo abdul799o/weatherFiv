@@ -52,7 +52,7 @@ const Weather = () => {
     }
     useEffect(() => { //API weather data fetched after initial page render
         fetchData();
-        weatherIcon();
+        //weatherIcon();
         todaysWeather();
     }, []);
 
@@ -89,11 +89,46 @@ const Weather = () => {
     const weeklyWeather = () => {
         const daysRange = getDaysRange(); // Get the formatted days of the week
         setWeeklyWeather(
-            <div className='weekly-weather'>
-                {daysRange.map((day, index) => (
-                    <p key={index}>{day}</p> // Display each day of the week
-            ))}
-        </div>
+        //     <div className='weekly-weather'>
+        //         {daysRange.map((day, index) => (
+        //             <p key={index}>{day}</p> // Display each day of the week
+        //     ))}
+        // </div>
+
+        <div id="weather-container">
+                <div id="icons-container">
+                    <div id ="icons">
+                    <p class="weather" id="day1"></p>
+                    <div class="image"><img src={require('./dot.jpg')} class="imgClass" id="img1"></img></div>
+                    </div>
+                </div>
+                <div id="icons-container">
+                    <div id ="icons">
+                    <p class="weather" id="day2"></p>
+                    <div class="image"><img src={require('./dot.jpg')} class="imgClass" id="img2"></img></div>
+                    </div>
+                </div>
+                <div id="icons-container">
+                    <div id ="icons">
+                    <p class="weather" id="day3"></p>
+                    <div class="image"><img src={require('./dot.jpg')} class="imgClass" id="img3"></img></div>
+                    </div>
+                </div>
+                <div id="icons-container">
+                    <div id ="icons">
+                    <p class="weather" id="day4"></p>
+                    <div class="image"><img src={require('./dot.jpg')} class="imgClass" id="img4"></img></div>
+                    </div>
+                </div>
+                <div id="icons-container">
+                    <div id ="icons">
+                    <p class="weather" id="day5"></p>
+                    <div class="image"><img src={require('./dot.jpg')} class="imgClass" id="img5"></img></div>
+                    </div>
+                </div>
+            </div>
+
+
     );
         setTodaysWeather();
     }
@@ -176,7 +211,7 @@ return (
                     <p>{weatherDisplay2}</p>
             </div>
 
-            <div id="weather-container">
+            {/* <div id="weather-container">
                 <div id="icons-container">
                     <div id ="icons">
                     <p class="weather" id="day1"></p>
@@ -207,7 +242,7 @@ return (
                     <div class="image"><img src={require('./dot.jpg')} class="imgClass" id="img5"></img></div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             
 
