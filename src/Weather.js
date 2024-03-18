@@ -257,41 +257,6 @@ return (
                     <p>{weatherDisplay2}</p>
             </div>
 
-            {/* <div id="weather-container">
-                <div id="icons-container">
-                    <div id ="icons">
-                    <p class="weather" id="day1"></p>
-                    <div class="image"><img src={require('./dot.jpg')} class="imgClass" id="img1"></img></div>
-                    </div>
-                </div>
-                <div id="icons-container">
-                    <div id ="icons">
-                    <p class="weather" id="day2"></p>
-                    <div class="image"><img src={require('./dot.jpg')} class="imgClass" id="img2"></img></div>
-                    </div>
-                </div>
-                <div id="icons-container">
-                    <div id ="icons">
-                    <p class="weather" id="day3"></p>
-                    <div class="image"><img src={require('./dot.jpg')} class="imgClass" id="img3"></img></div>
-                    </div>
-                </div>
-                <div id="icons-container">
-                    <div id ="icons">
-                    <p class="weather" id="day4"></p>
-                    <div class="image"><img src={require('./dot.jpg')} class="imgClass" id="img4"></img></div>
-                    </div>
-                </div>
-                <div id="icons-container">
-                    <div id ="icons">
-                    <p class="weather" id="day5"></p>
-                    <div class="image"><img src={require('./dot.jpg')} class="imgClass" id="img5"></img></div>
-                    </div>
-                </div>
-            </div> */}
-
-            
-
             {/*Displays general weather information and catered advice to users*/}
             <div className = 'weather-desc'>
                 <h2>Weather Information</h2>
@@ -300,24 +265,23 @@ return (
                 <p>Humidity : {weatherData.main.humidity}%</p>
                 <p>Pressure : {weatherData.main.pressure}</p>
                 <p>Wind Speed : {weatherData.wind.speed}m/s</p>
-
-                <div id = 'activity-desc'>
-                    <h2>Activity Specific</h2>
-                    <h3>Cycling</h3>
-                    <p>{descriptions(activity[0])}</p>
-                    <h3>Hiking</h3>
-                    <p>{descriptions(activity[1])}</p>
-                    <h3>Camping</h3>
-                    <p>{descriptions(activity[2])}</p>
-                    <h3>Clothing</h3>
-                    <p>{descriptions(activity[3])}</p>
-                </div>
             </div>
-
-            {/*Displays weather map for the day*/}
-            <div>
-                <img id = "weather-map" src = {weatherMap} alt='map'></img>
+            <div id = 'activity-desc'>
+                <h2>Activity Specific</h2>
+                <h3>Cycling</h3>
+                <p>{descriptions(activity[0])}</p>
+                <h3>Hiking</h3>
+                <p>{descriptions(activity[1])}</p>
+                <h3>Camping</h3>
+                <p>{descriptions(activity[2])}</p>
+                <h3>Clothing</h3>
+                <p>{descriptions(activity[3])}</p>
             </div>
+        </div>
+        {/*Displays weather map for the day*/}
+        <div id = "weather-map">
+            <p>Map of Area</p>
+            <img id = "map-image" src = {weatherMap} alt='map'></img>
         </div>
     </>
     ) : (
