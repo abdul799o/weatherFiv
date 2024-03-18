@@ -7,11 +7,13 @@ const Weather = () => {
     const z = 0;
     const x = 0;
     const y = 0;
+    const [icon, setIcon] = useState('');
     const [weatherData, setWeatherData] = useState(null);
     const [weatherMap, setWeatherMap] = useState(null); 
     const [weatherDisplay, setWeeklyWeather] = useState('');
     const [weatherDisplay2, setTodaysWeather] = useState(''); // weatherDisplay and weatherDisplay2 set by the correlating functions
     const currentDay = new Date().toDateString();
+    const activity = ["cycling", "hiking", "camping", "clothing"]
 
     async function fetchData() {
         try {
@@ -41,6 +43,7 @@ const Weather = () => {
     }
     useEffect(() => { //API weather data fetched after initial page render
         fetchData();
+        weatherIcon();
         todaysWeather();
     }, []);
 
@@ -53,9 +56,31 @@ const Weather = () => {
         fetchData();
     };
 
-  //Sets the weather data display to just today's weather
-  const todaysWeather = () => {
-        setTodaysWeather(<p>Today's Weather Will Be Here</p>);
+    const weatherIcon = () =>{
+        setIcon(<img src={require('./images/Sun_fill.png')} alt=""></img>)
+
+    }
+
+    //Sets the weather data display to just today's weather
+    const todaysWeather = () => {
+        setTodaysWeather(
+        <div className = "todayGrid">
+            <div id = "weatherHour1">
+             <h5>Hour 1</h5>
+             <p>{icon}</p>
+            </div>
+
+            <div id = "weatherHour2">
+             <h5>Hour 2</h5>
+             <p>{icon}</p>
+            </div>
+
+            <div id = "weatherHour3">
+             <h5>Hour 3</h5>
+             <p>{icon}</p>
+            </div>
+        </div>
+        );
         setWeeklyWeather();
     }
 
@@ -92,6 +117,50 @@ const Weather = () => {
         </div>
     );
         setTodaysWeather();
+    }
+    const descriptions = (activity) => {
+        const cyclDesc = ["Roads may be slippery due to rain. Take caution", "Roads may be slippery due to ice. Take caution.", "No issues with slippery roads or visibility", "No major issues with slippery roads or visibility", "High risk activity. Thunderstorm currently taking place.", "Visibility on roads may be affected. Take caution."]
+        const hikDesc = ["Some paths may become slippery due to rain.", "Some paths may be unsafe due to ice formations. Take caution.", "Weather ideal for hiking!", "Weather ideal for hiking!", "Thunderstorm currently taking place. Hiking not recommended.", "Visibility on pathways may be affected."]
+        const campDesc = ["Prepare shelter to protect from rain.", "Prepare shelter to protect from snow or hail.", "Weather ideal for camping", "Weather ideal for camping", "Shelter required to protect from thunderstorm. Take caution", "No major issues with camping."]
+        const clothDesc = ["Coat recommended", "Wear multiple layers to protect from cold and snow.", "Sunglasses recommended", "Coat recommended to prepare for possible rain", "Prepare for heavy rain with waterproof clothing.", "No clothing recommendations."]
+        if (activity === "cycling"){
+            return cyclDesc[descCategory()]
+        }
+        else if (activity === "hiking") {
+            return hikDesc[descCategory()]
+        }
+        else if (activity ==="camping"){
+            return campDesc[descCategory()]
+        }
+        else if (activity === "clothing") {
+            return clothDesc[descCategory()]
+        }
+    }
+
+    const descCategory = () => {
+        var descNo = -1
+        if (weatherData.weather[0].main === "Rain" || weatherData.weather[0].main === "Drizzle"){
+            descNo = 0
+        }
+        else if (weatherData.weather[0].main === "Snow"){
+            descNo = 1
+        }
+        else if (weatherData.weather[0].main === "Clear"){
+            descNo = 2
+        }
+        else if (weatherData.weather[0].main === "Clouds"){
+            descNo = 3
+        }
+        else if (weatherData.weather[0].main === "Thunderstorm"){
+            descNo = 4
+        }
+        else if (weatherData.weather[0].main === "Fog"){
+            descNo = 5
+        }
+        else {
+            descNo = 6
+        }
+        return descNo
     }
 
 return (
@@ -136,11 +205,13 @@ return (
                 <div id = 'activity-desc'>
                     <h2>Activity Specific</h2>
                     <h3>Cycling</h3>
-                    <p>INSERT STATEMENTS HERE</p>
+                    <p>{descriptions(activity[0])}</p>
                     <h3>Hiking</h3>
-                    <p>INSERT STATEMENTS HERE</p>
+                    <p>{descriptions(activity[1])}</p>
                     <h3>Camping</h3>
-                    <p>INSERT STATEMENTS HERE</p>
+                    <p>{descriptions(activity[2])}</p>
+                    <h3>Clothing</h3>
+                    <p>{descriptions(activity[3])}</p>
                 </div>
             </div>
 
