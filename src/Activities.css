@@ -7,8 +7,7 @@
     border-radius: 2rem;
 }
 /*Styling for activity page button*/
-#act-button{
-    display: none;
+#weath-button{
     margin: 2.5rem;
     background-color: #6AD8B7;
     border: #6AD8B7;
@@ -21,10 +20,8 @@
     background-image: linear-gradient(#98d5d8,lightgreen);
     font-family: Arial, Helvetica, sans-serif;
     background-size: 100%;
-    padding: 1em;
 }
-
-.page-grid{
+.page-grid2{
     display: grid;
     justify-content: center;
     min-height: 100%;
@@ -34,12 +31,13 @@
     margin-left: 2.5rem;
     margin-right: 2.5rem;
 }
-.page-grid > .flex-container,.weather-box{
+.page-grid2 > .flex-container2,.weather-box{
     grid-column: 1/ span 2;
 }
 
+
 /*Styling for the weather page header*/
-.flex-container{
+.flex-container2{
     display: flex;
     background-image: url("./images/Rectangle\ 2.png");
     justify-content: center;
@@ -48,7 +46,7 @@
     height: 10em;
     background-size: cover;
 }
-.flex-container > div{
+.flex-container2 > div{
     margin: 1rem;
     padding-block: 2rem;
     font-size: 3rem;
@@ -58,7 +56,6 @@
 #title{
     margin-right: 4rem;
 }
-
 
 /*Styling for the grid displaying today's weather and weekly weather*/
 .weather-box{
@@ -122,10 +119,10 @@
 }
 
 /*Styling for the general weather information & activity information box*/
-.weather-desc, #activity-desc{
+#cycling, #hiking, #camping, #clothing{
     background-color: #6AD8B7;
     border-radius: 2.5rem;
-    height: 25em;
+    height: 10em;
     width: auto;
     text-align: center;
     margin-bottom: 3em;
@@ -134,14 +131,26 @@
     margin: 2rem;
     font-size: 1.5rem;
 }
-#activity-desc{
-    grid-row: 3;
-    grid-column: 2;
-    overflow-wrap: break-word;
-}
-#activity-desc > p{
+
+#cycling, #hiking, #camping, #clothing{
     margin: 0rem;
-    font-size: 1rem;
+    font-size: 1.5rem;
+}
+
+#cycling{
+    grid-column: 1;
+}
+
+#hiking{
+    grid-column: 2;
+}
+
+#camping{
+    grid-column: 1;
+}
+
+#clothing{
+    grid-column: 2;
 }
 
 /*Styling for the included weather map*/
@@ -155,7 +164,7 @@
 #weather-container{
     display: flex;
     height: 10rem;
-    width: 80%;
+    width: 75rem;
 }
 
 #icons-container{
@@ -165,22 +174,6 @@
     height: 40em;
     width: 80%;
 }
-
-/*Styling of Today's Weather Display for WeatherHourly.js*/
-.todayFlex{
-    display: flex;
-    height: 15rem;
-    width: auto;
-    overflow: auto;
-    white-space: nowrap;
-}
-.todayFlex > div{
-    margin: 1rem;
-    padding: 2rem;
-    font-size: 3rem;
-    font-weight: 600;
-    font-size: 1.5rem;
-}
 /*Responsive Media Queries for Smaller Devices*/
 @media only screen and (max-width:768px){
     p{
@@ -189,49 +182,27 @@
         font-weight: bold;
     }
     /*Styling for the page re-composition*/
-    .page-grid{
+    .page-grid2{
         display: grid;
         grid-template-columns: auto auto;
-        grid-template-rows: 10em 15em 20em 1em;
+        grid-template-rows: 15em 20em 20em 20em;
         row-gap: 100px;
         padding: 25px;
     }
-    /*The header will still be at the top on mobile devices.
-    It will only be below the search bar*/
-    .flex-container{
+    .flex-container2{
         grid-row: 1/1;
     }
-    /*The activity button will only be accessible on mobile devices
-    Otherwise this information will be displayed alongside weather
-    information*/
-    #act-button{
-        display:block;
-        grid-row:none;
-    }
-    /*Information about todays/weekly weather will be displayed
-    immediately below the header on mobile devices*/
     .weather-box{
         grid-row: 2/2;
-        height: 20em;
-        width: 20em;
     }
-    /*Weather descriptions will be displayed in the same box as
-    today's/weekly weather on mobile devices*/
     .weather-desc{
         grid-row: 3/3;
         grid-column: 1/span 2;
-        width: 20em;
+        width: auto;
 
     }
-    /*Removing activity descriptions from the weather page on mobile devices
-    It will instead be displayed on a seperate page accessible via a button*/
-    #activity-desc{
-        display: none;
-    }
-    /*Displaying the weather map at the bottom of the page on mobile devices*/
     #weather-map{
         grid-row: 4/4;
         grid-column: 1/span 2;
-        width:20em;
     }
 }
