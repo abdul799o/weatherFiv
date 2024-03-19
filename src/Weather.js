@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Weather.css';
 import WeatherHourly from './WeatherHourly';
 import DailyWeather from './DailyWeather';
-
 
 const Weather = () => {
     const [city, setCity] = useState('London');
@@ -16,9 +16,10 @@ const Weather = () => {
     const [weatherDisplay, setWeeklyWeather] = useState('');
     const [weatherDisplay2, setTodaysWeather] = useState(''); // weatherDisplay and weatherDisplay2 set by the correlating functions
     const currentDay = new Date().toDateString();
-    const activity = ["cycling", "hiking", "camping", "clothing"] //Order for the 3 activities and clothing used for recommendations
+    const activities = ["cycling", "hiking", "camping", "clothing"] //Order for the 3 activities and clothing used for recommendations
     const [forecastData, setForecastData] = useState(null);
     const [dailyData, setDailyData] = useState([]);
+    const navigate = useNavigate();
 
     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     const d = new Date();
@@ -130,6 +131,7 @@ const Weather = () => {
         e.preventDefault();
         fetchData();
     };
+
     const weatherIcon = () =>{
         setIcon(<img src={require('./images/Sun_fill.png')} alt=""></img>)
     }
@@ -178,21 +180,21 @@ const Weather = () => {
         const campDesc = ["Prepare shelter to protect from rain.", "Prepare shelter to protect from snow or hail.", "Weather ideal for camping", "Weather ideal for camping", "Shelter required to protect from thunderstorm. Take caution", "No major issues with camping."]
         const clothDesc = ["Coat recommended", "Wear multiple layers to protect from cold and snow.", "Sunglasses recommended", "Coat recommended to prepare for possible rain", "Prepare for heavy rain with waterproof clothing.", "No clothing recommendations."]
         if (activity === "cycling"){
-            return cyclDesc[descCategory()]
+            return cyclDesc[recCategory()]
         }
         else if (activity === "hiking") {
-            return hikDesc[descCategory()]
+            return hikDesc[recCategory()]
         }
         else if (activity ==="camping"){
-            return campDesc[descCategory()]
+            return campDesc[recCategory()]
         }
         else if (activity === "clothing") {
-            return clothDesc[descCategory()]
+            return clothDesc[recCategory()]
         }
     }
     //Returns an index depending on the current weather conditions which determines which 
     //recommendation to display in the description arrays for the three descriptions and clothing
-    const descCategory = () => {
+    const recCategory = () => {
         var descNo = -1
         if (weatherData.weather[0].main === "Rain" || weatherData.weather[0].main === "Drizzle"){
             descNo = 0
@@ -236,8 +238,9 @@ return (
             {/*Displays the chosen location, current day, and main temperature*/}
             <div className='flex-container'> 
                 <div id='title'><p>{weatherData.name}</p></div>
-                <div><p>{currentDay}</p></div>
-                <div><p>{weatherData.main.temp}°C</p></div>
+                <div id='date'><p>{currentDay}</p></div>
+                <div id='temp'><p>{weatherData.main.temp}°C</p></div>
+                <button id = 'act-button' onClick={() => navigate('/activities')}>Activities</button>
             </div>
 
             {/*Displays the weekly weather or current day weather depending on user button selection*/}
@@ -258,15 +261,15 @@ return (
                 <p>Wind Speed : {weatherData.wind.speed}m/s</p>
             </div>
             <div id = 'activity-desc'>
-                <h2>Activity Specific</h2>
+                <h2>Activity Specific Recommendations</h2>
                 <h3>Cycling</h3>
-                <p>{descriptions(activity[0])}</p>
+                <p>{descriptions(activities[0])}</p>
                 <h3>Hiking</h3>
-                <p>{descriptions(activity[1])}</p>
+                <p>{descriptions(activities[1])}</p>
                 <h3>Camping</h3>
-                <p>{descriptions(activity[2])}</p>
+                <p>{descriptions(activities[2])}</p>
                 <h3>Clothing</h3>
-                <p>{descriptions(activity[3])}</p>
+                <p>{descriptions(activities[3])}</p>
             </div>
         </div>
         {/*Displays weather map for the day*/}
