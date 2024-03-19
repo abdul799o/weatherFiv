@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Weather.css';
-import DailyWeather from './DailyWeather.js';
+import WeatherHourly from './WeatherHourly';
+import DailyWeather from './DailyWeather';
+
 
 const Weather = () => {
     const [city, setCity] = useState('London');
@@ -134,22 +136,7 @@ const Weather = () => {
     //Sets the weather data display to just today's weather
     const todaysWeather = () => {
         setTodaysWeather(
-        <div className = "todayGrid">
-            <div id = "weatherHour1">
-             <h5>Hour 1</h5>
-             <p>{icon}</p>
-            </div>
-
-            <div id = "weatherHour2">
-             <h5>Hour 2</h5>
-             <p>{icon}</p>
-            </div>
-
-            <div id = "weatherHour3">
-             <h5>Hour 3</h5>
-             <p>{icon}</p>
-            </div>
-        </div>
+        <WeatherHourly cityVal={city}/>
         );
         setWeeklyWeather();
     }
