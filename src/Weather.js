@@ -16,9 +16,10 @@ const Weather = () => {
     const [weatherDisplay, setWeeklyWeather] = useState('');
     const [weatherDisplay2, setTodaysWeather] = useState(''); // weatherDisplay and weatherDisplay2 set by the correlating functions
     const currentDay = new Date().toDateString();
-    const activity = ["cycling", "hiking", "camping", "clothing"] //Order for the 3 activities and clothing used for recommendations
+    const activities = ["cycling", "hiking", "camping", "clothing"] //Order for the 3 activities and clothing used for recommendations
     const [forecastData, setForecastData] = useState(null);
     const [dailyData, setDailyData] = useState([]);
+    const navigate = useNavigate();
 
     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     const d = new Date();
