@@ -158,19 +158,31 @@
     width: 80%;
 }
 
-#icons-container{
-    margin: 7rem;
+#weather-container > #icons-container{
+    margin: 1.2rem;
 }
+
 #map-image{
     height: 40em;
     width: 80%;
 }
 
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, .5);
+    box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+  }
+
 /*Styling of Today's Weather Display for WeatherHourly.js*/
 .todayFlex{
     display: flex;
-    height: 15rem;
-    width: auto;
+    height: 20rem;
+    width: 300%;
     overflow: auto;
     white-space: nowrap;
 }
