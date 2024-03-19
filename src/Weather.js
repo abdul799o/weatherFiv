@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Weather.css'; 
 import WeatherHourly from './WeatherHourly';
+import Map from './Map';
 
 //main page component
 const Weather = () => {
@@ -253,8 +254,7 @@ return (
         
         {/*Displays weather map for the day*/}
         <div id = "weather-map">
-            <p>Map of Area</p>
-            <img id = "map-image" src = {weatherMap} alt='map'></img>
+            <Map/>
         </div>
     </>
     ) : (

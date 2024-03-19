@@ -162,6 +162,10 @@
     padding-bottom: 3em;
     justify-content: center;
 }
+.mapDiv{
+    width: 500px;
+    height: 500px;
+}
 #map-image{
     height: 40em;
     width: 80%;
