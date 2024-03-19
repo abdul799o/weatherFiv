@@ -86,23 +86,6 @@
     padding-top: 2rem;
     font-size: 2rem;
 }
-/*Styling of Today's Weather Display*/
-.todayGrid{
-    display: grid;
-    grid-template-columns: 33% 33% 33%;
-    column-gap: 5rem;
-    height: 36rem;
-    width: 100%;
-}
-#weatherHour1{
-    grid-column: 1;
-}
-#weatherHour2{
-    grid-column: 2;
-}
-#weatherHour3{
-    grid-column: 3;
-}
 
 /*Styling of Weekly Weather Display*/
 #weekly-weather{
@@ -118,7 +101,7 @@
     width: 1rem;
 }
 
-/*Styling for the general weather information & activity information box*/
+/*Styling for the activity information boxes*/
 #cycling, #hiking, #camping, #clothing{
     background-color: #6AD8B7;
     border-radius: 2.5rem;
@@ -131,24 +114,19 @@
     margin: 2rem;
     font-size: 1.5rem;
 }
-
 #cycling, #hiking, #camping, #clothing{
     margin: 0rem;
     font-size: 1.5rem;
 }
-
 #cycling{
     grid-column: 1;
 }
-
 #hiking{
     grid-column: 2;
 }
-
 #camping{
     grid-column: 1;
 }
-
 #clothing{
     grid-column: 2;
 }
@@ -160,20 +138,11 @@
     padding-bottom: 3em;
     justify-content: center;
 }
-
-#weather-container{
-    display: flex;
-    height: 10rem;
-    width: 75rem;
-}
-
-#icons-container{
-    margin: 7rem;
-}
 #map-image{
     height: 40em;
     width: 80%;
 }
+
 /*Responsive Media Queries for Smaller Devices*/
 @media only screen and (max-width:768px){
     p{

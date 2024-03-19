@@ -1,5 +1,5 @@
-import Weather from "./Weather"
-import Activities from "./Activities"
+import Weather from './Weather';
+import Activities from './Activities';
 import './App.css';
 import { BrowserRouter, Route, Routes } from  'react-router-dom';
 

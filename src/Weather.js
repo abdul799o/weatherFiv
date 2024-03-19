@@ -12,7 +12,6 @@ const Weather = () => {
     const z = 0;
     const x = 0;
     const y = 0;
-    const [icon, setIcon] = useState('');
     const [weatherData, setWeatherData] = useState(null);
     const [weatherMap, setWeatherMap] = useState(null); 
     const [weatherDisplay, setWeeklyWeather] = useState('');
