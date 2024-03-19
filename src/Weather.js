@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Weather.css';
 import WeatherHourly from './WeatherHourly';
+import DailyWeather from './DailyWeather';
+
 
 const Weather = () => {
     const [city, setCity] = useState('London');
@@ -15,14 +17,38 @@ const Weather = () => {
     const [weatherDisplay2, setTodaysWeather] = useState(''); // weatherDisplay and weatherDisplay2 set by the correlating functions
     const currentDay = new Date().toDateString();
     const activity = ["cycling", "hiking", "camping", "clothing"] //Order for the 3 activities and clothing used for recommendations
+    const [forecastData, setForecastData] = useState(null);
+    const [dailyData, setDailyData] = useState([]);
 
-    async function fetchData() {
+    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    const d = new Date();
+    let dayOfTheWeek = weekday[d.getDay()];
+
+    async function fetchForecast() {
         try {
             const response = await axios.get(
-                `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=69084501b8a41087da148556d2a1b461`
+                `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&units=metric&cnt=7&appid=69084501b8a41087da148556d2a1b461`
             );
-            setWeatherData(response.data);
-            console.log(response.data); //You can see all the weather data in console log
+
+            setForecastData(response.data);
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    
+    async function fetchData() {
+        try {
+
+            const apiURL = "https://api.openweathermap.org/data/2.5/forecast/daily?q=London&units=metric&cnt=7&appid=69084501b8a41087da148556d2a1b461";
+            try {
+              const response = await fetch(apiURL);
+              const data = await response.json();
+              setDailyData(data.list);
+            } catch (error) {
+              console.error("Error fetching data: ", error);
+            }
+
         } catch (error) {
             console.error(error);
         }
@@ -36,13 +62,6 @@ const Weather = () => {
                     var img = URL.createObjectURL(blob);
                     console.log(img);
                     setWeatherMap(img);
-
-                    // for(i=0; i<5; i++){
-                    //     Number(data.list[i].main.temp.toFixed(2)+"°")
-                    // }
-                    // for(i=0; i<5; i++){
-                    //     src="https://openweathermap.org/img/wn/" +data.list[i].weather[0].icon + ".png";
-                    // }
                 });
 
             console.log(reply.data); //You can see all the weather data in console log
@@ -50,12 +69,21 @@ const Weather = () => {
             console.error(error);
         }
     }
+
     useEffect(() => { //API weather data fetched after initial page render
         fetchData();
         weatherIcon();
         todaysWeather();
         getLocation();
+        fetchForecast(); 
+
     }, []);
+
+    function getDayOfWeek(unixTimestamp) {
+        const date = new Date(unixTimestamp * 1000); // Convert to milliseconds
+        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        return days[date.getDay()];
+      }
 
     //Gets User Location 
     const getLocation=() =>  {
@@ -89,6 +117,15 @@ const Weather = () => {
         setCity(e.target.value);
     };
 
+    function CheckDay(day){
+        if(day + d.getDay() > 6){
+            return day + d.getDay() - 7;
+        }
+        else{
+            return day + d.getDay();
+        }
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
         fetchData();
@@ -106,7 +143,7 @@ const Weather = () => {
 
     const getDaysRange = () => {
         const days = [];
-        for (let i = -1; i <= 3; i++) { // Starting from -1 to include the day before
+        for (let i = 1; i <= 4; i++) { // Starting from 1 to include the current day
             const day = new Date();
             day.setDate(day.getDate() + i);
             // Format the date to show only the day of the week
@@ -116,52 +153,21 @@ const Weather = () => {
         return days;
     };
 
-    //Sets the weather data display to daily weather
+
     const weeklyWeather = () => {
-        const daysRange = getDaysRange(); // Get the formatted days of the week
         setWeeklyWeather(
-        //     <div className='weekly-weather'>
-        //         {daysRange.map((day, index) => (
-        //             <p key={index}>{day}</p> // Display each day of the week
-        //     ))}
-        // </div>
+            <div id="weather-container">
+            {dailyData.map((day, index) => (
+                <div key={index} id="icons-container">
+                    <h3>{getDayOfWeek(day.dt)}</h3>
+                    <p>{day.temp.day}°C</p>
+                    <img src={`http://openweathermap.org/img/w/${day.weather[0].icon}.png`} alt={day.weather[0].description} />
+                </div>
+            ))}
 
-        <div id="weather-container">
-                <div id="icons-container">
-                    <div id ="icons">
-                    <p class="weather" id="day1"></p>
-                    <div class="image"><img src={require('./dot.jpg')} class="imgClass" id="img1"></img></div>
-                    </div>
-                </div>
-                <div id="icons-container">
-                    <div id ="icons">
-                    <p class="weather" id="day2"></p>
-                    <div class="image"><img src={require('./dot.jpg')} class="imgClass" id="img2"></img></div>
-                    </div>
-                </div>
-                <div id="icons-container">
-                    <div id ="icons">
-                    <p class="weather" id="day3"></p>
-                    <div class="image"><img src={require('./dot.jpg')} class="imgClass" id="img3"></img></div>
-                    </div>
-                </div>
-                <div id="icons-container">
-                    <div id ="icons">
-                    <p class="weather" id="day4"></p>
-                    <div class="image"><img src={require('./dot.jpg')} class="imgClass" id="img4"></img></div>
-                    </div>
-                </div>
-                <div id="icons-container">
-                    <div id ="icons">
-                    <p class="weather" id="day5"></p>
-                    <div class="image"><img src={require('./dot.jpg')} class="imgClass" id="img5"></img></div>
-                    </div>
-                </div>
-            </div>
-
-
-    );
-        setTodaysWeather();
+        </div>
+        )
+        setTodaysWeather(); // Assuming you want to clear the today's weather when displaying weekly weather
     }
 
     //Displays the recommendations for the specific activities based on the weather conditions
@@ -276,3 +282,15 @@ return (
 );
 };
 export default Weather;
+
+
+
+
+
+
+
+
+
+
+
+
