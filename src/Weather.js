@@ -1,11 +1,13 @@
+//Imports from react & external files
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './Weather.css';
+import './Weather.css'; 
 import WeatherHourly from './WeatherHourly';
-import DailyWeather from './DailyWeather';
 
+//main page component
 const Weather = () => {
+    //constants declarations
     const [city, setCity] = useState('London');
     const z = 0;
     const x = 0;
@@ -17,19 +19,12 @@ const Weather = () => {
     const [weatherDisplay2, setTodaysWeather] = useState(''); // weatherDisplay and weatherDisplay2 set by the correlating functions
     const currentDay = new Date().toDateString();
     const activities = ["cycling", "hiking", "camping", "clothing"] //Order for the 3 activities and clothing used for recommendations
-   // const [forecastData, setForecastData] = useState(null);
     const [dailyData, setDailyData] = useState([]);
     const navigate = useNavigate();
 
-    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-    const d = new Date();
-    let dayOfTheWeek = weekday[d.getDay()];
-
+    //fetching weather location data
     async function fetchForecast() {
         try {
-            // const response = await axios.get(
-            //     `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&units=metric&cnt=7&appid=69084501b8a41087da148556d2a1b461`
-            // );
 
             const response = await axios.get(
                 `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=69084501b8a41087da148556d2a1b461`
@@ -42,6 +37,7 @@ const Weather = () => {
         }
     }
     
+    //fetching daily weather data
     async function fetchData() {
         try {
 
@@ -57,6 +53,8 @@ const Weather = () => {
         } catch (error) {
             console.error(error);
         }
+
+        //fetching map data
         try {
             const reply = await axios.get(
                 `https://tile.openweathermap.org/map/temp_new/${z}/${x}/${y}.png?appid=69084501b8a41087da148556d2a1b461`
@@ -77,13 +75,13 @@ const Weather = () => {
 
     useEffect(() => { //API weather data fetched after initial page render
         fetchData();
-        weatherIcon();
         todaysWeather();
         getLocation();
         fetchForecast(); 
 
     }, []);
 
+    //gets day of the week
     function getDayOfWeek(unixTimestamp) {
         const date = new Date(unixTimestamp * 1000); // Convert to milliseconds
         const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -110,7 +108,6 @@ const Weather = () => {
             console.log(data);
         })
         .catch(error => console.log(error));
-            //setCity (weatherData);
           }
           //Unsuccessful Geolocation
           function error() {
@@ -118,29 +115,17 @@ const Weather = () => {
           }
         }
 
+    //form handling
     const handleInputChange = (e) => {
         setCity(e.target.value);
     };
-
-    function CheckDay(day){
-        if(day + d.getDay() > 6){
-            return day + d.getDay() - 7;
-        }
-        else{
-            return day + d.getDay();
-        }
-    }
-
     const handleSubmit = (e) => {
         e.preventDefault();
         fetchForecast();
         fetchData();
     };
 
-    const weatherIcon = () =>{
-        setIcon(<img src={require('./images/Sun_fill.png')} alt=""></img>)
-    }
-    //Sets the weather data display to just today's weather
+    //Sets the weather data display to just today's weather by calling WeatherHourly
     const todaysWeather = () => {
         setTodaysWeather(
         <WeatherHourly cityVal={city}/>
@@ -148,19 +133,7 @@ const Weather = () => {
         setWeeklyWeather();
     }
 
-    const getDaysRange = () => {
-        const days = [];
-        for (let i = 1; i <= 4; i++) { // Starting from 1 to include the current day
-            const day = new Date();
-            day.setDate(day.getDate() + i);
-            // Format the date to show only the day of the week
-            const dayOfWeek = day.toLocaleDateString('en-US', { weekday: 'long' });
-            days.push(dayOfWeek);
-        }
-        return days;
-    };
-
-
+     //sets weekly weather information by going through the daily data array
     const weeklyWeather = () => {
         setWeeklyWeather(
             <div id="weather-container">
@@ -225,8 +198,9 @@ const Weather = () => {
         return descNo
     }
 
-return (
 
+//returns the page layout
+return (
     <div className='appdesign'> 
         <form onSubmit={handleSubmit}> {/*User inputs location to know information about*/}
             <input
@@ -277,6 +251,7 @@ return (
                 <p>{descriptions(activities[3])}</p>
             </div>
         </div>
+        
         {/*Displays weather map for the day*/}
         <div id = "weather-map">
             <p>Map of Area</p>

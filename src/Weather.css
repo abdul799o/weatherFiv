@@ -6,15 +6,6 @@
     padding: 1rem;
     border-radius: 2rem;
 }
-/*Styling for activity page button*/
-#act-button{
-    display: none;
-    margin: 2.5rem;
-    background-color: #6AD8B7;
-    border: #6AD8B7;
-    padding: 1rem;
-    border-radius: 2rem;
-}
 
 /*Styling for the page composition*/
 .appdesign{
@@ -23,7 +14,6 @@
     background-size: 100%;
     padding: 1em;
 }
-
 .page-grid{
     display: grid;
     justify-content: center;
@@ -55,10 +45,18 @@
     font-weight: 600;
     font-size: 2rem;
 }
+/*Styling for activity page button*/
+#act-button{
+    display: none;
+    margin: 2.5rem;
+    background-color: #6AD8B7;
+    border: #6AD8B7;
+    padding: 1rem;
+    border-radius: 2rem;
+}
 #title{
     margin-right: 4rem;
 }
-
 
 /*Styling for the grid displaying today's weather and weekly weather*/
 .weather-box{
@@ -89,36 +87,48 @@
     padding-top: 2rem;
     font-size: 2rem;
 }
-/*Styling of Today's Weather Display*/
-.todayGrid{
-    display: grid;
-    grid-template-columns: 33% 33% 33%;
-    column-gap: 5rem;
-    height: 36rem;
-    width: 100%;
+
+/*Styling of Today's Weather Display for WeatherHourly.js*/
+.todayFlex{
+    display: flex;
+    height: 20rem;
+    width: 300%;
+    overflow: auto;
+    white-space: nowrap;
 }
-#weatherHour1{
-    grid-column: 1;
+.todayFlex > div{
+    margin: 1rem;
+    padding: 2rem;
+    font-size: 3rem;
+    font-weight: 600;
+    font-size: 1.5rem;
 }
-#weatherHour2{
-    grid-column: 2;
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
 }
-#weatherHour3{
-    grid-column: 3;
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, .5);
+    box-shadow: 0 0 1px rgba(255, 255, 255, .5);
 }
 
 /*Styling of Weekly Weather Display*/
-#weekly-weather{
-    display: grid;
-    grid-template-columns: 9rem 9rem 9rem 9rem 9rem;
-    gap: 1rem;
-    text-align: center;
-    width: 100%;
-}
-
 .imgClass{
     height: 1rem;
     width: 1rem;
+}
+#weather-container{
+    display: flex;
+    height: 10rem;
+    width: 100%;
+    font-size: 1.2rem;
+    justify-content: center;
+}
+#weather-container > #icons-container{
+    margin: 1.2rem;
+    height: 5rem;
+    width: 100%;
 }
 
 /*Styling for the general weather information & activity information box*/
@@ -151,48 +161,11 @@
     padding-bottom: 3em;
     justify-content: center;
 }
-
-#weather-container{
-    display: flex;
-    height: 10rem;
-    width: 80%;
-}
-
-#weather-container > #icons-container{
-    margin: 1.2rem;
-}
-
 #map-image{
     height: 40em;
     width: 80%;
 }
 
-::-webkit-scrollbar {
-    -webkit-appearance: none;
-    width: 7px;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-    background-color: rgba(0, 0, 0, .5);
-    box-shadow: 0 0 1px rgba(255, 255, 255, .5);
-  }
-
-/*Styling of Today's Weather Display for WeatherHourly.js*/
-.todayFlex{
-    display: flex;
-    height: 20rem;
-    width: 300%;
-    overflow: auto;
-    white-space: nowrap;
-}
-.todayFlex > div{
-    margin: 1rem;
-    padding: 2rem;
-    font-size: 3rem;
-    font-weight: 600;
-    font-size: 1.5rem;
-}
 /*Responsive Media Queries for Smaller Devices*/
 @media only screen and (max-width:768px){
     p{
