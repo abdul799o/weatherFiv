@@ -17,7 +17,7 @@ const Weather = () => {
     const [weatherDisplay2, setTodaysWeather] = useState(''); // weatherDisplay and weatherDisplay2 set by the correlating functions
     const currentDay = new Date().toDateString();
     const activities = ["cycling", "hiking", "camping", "clothing"] //Order for the 3 activities and clothing used for recommendations
-    const [forecastData, setForecastData] = useState(null);
+   // const [forecastData, setForecastData] = useState(null);
     const [dailyData, setDailyData] = useState([]);
     const navigate = useNavigate();
 
@@ -27,11 +27,15 @@ const Weather = () => {
 
     async function fetchForecast() {
         try {
-            const response = await axios.get(
-                `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&units=metric&cnt=7&appid=69084501b8a41087da148556d2a1b461`
-            );
+            // const response = await axios.get(
+            //     `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&units=metric&cnt=7&appid=69084501b8a41087da148556d2a1b461`
+            // );
 
-            setForecastData(response.data);
+            const response = await axios.get(
+                `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=69084501b8a41087da148556d2a1b461`
+                );
+
+            setWeatherData(response.data);
 
         } catch (error) {
             console.error(error);
@@ -41,7 +45,7 @@ const Weather = () => {
     async function fetchData() {
         try {
 
-            const apiURL = "https://api.openweathermap.org/data/2.5/forecast/daily?q=London&units=metric&cnt=7&appid=69084501b8a41087da148556d2a1b461";
+            const apiURL = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&units=metric&cnt=7&appid=69084501b8a41087da148556d2a1b461`;
             try {
               const response = await fetch(apiURL);
               const data = await response.json();
@@ -129,6 +133,7 @@ const Weather = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        fetchForecast();
         fetchData();
     };
 
