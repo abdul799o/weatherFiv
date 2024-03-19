@@ -151,6 +151,22 @@
     height: 40em;
     width: 80%;
 }
+
+/*Styling of Today's Weather Display for WeatherHourly.js*/
+.todayFlex{
+    display: flex;
+    height: 15rem;
+    width: auto;
+    overflow: auto;
+    white-space: nowrap;
+}
+.todayFlex > div{
+    margin: 1rem;
+    padding: 2rem;
+    font-size: 3rem;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
 /*Responsive Media Queries for Smaller Devices*/
 @media only screen and (max-width:768px){
     p{
